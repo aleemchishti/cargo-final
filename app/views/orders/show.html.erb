@@ -1,0 +1,12 @@
+<div class="container" style="font-family: monospace;"><br><br>
+  <h1>Order</h1>
+  <h3>From: <%= @order.from %></h3>
+  <h3>To: <%= @order.to %></h3>
+  <h3>Weight: <%= @order.weight_capacity %></h3>
+  <h3>Sender: <%=@order.sender_name%></h3>
+  <h3>Receiver: <%= @order.receiver_name %></h3>
+  <h3>Contact: <%= @order.contact %></h3>
+  <br>
+  <td><%= link_to "Back", orders_path, class: 'btn btn-primary'%></td>
+  <td><%= link_to 'Edit', edit_order_path(@order), class: 'btn btn-warning'%></td>
+</div>

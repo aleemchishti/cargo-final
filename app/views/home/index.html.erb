@@ -1,0 +1,33 @@
+<div class="container"><br><br>
+	<h1>Welcome to the Courierails</h1><br>
+	<% if current_user %>
+		<% if !current_user.has_any_role? %>
+			<h1>neither sender nor traveller</h1>
+	    <div class="container">
+	      <div class="d-flex p-2 align-items-center">
+	        <%= form_tag(assign_role_path, method: :get, class: "form-inline my-2 my-lg-0")  do %>
+	          <%= hidden_field_tag(:role, "traveler") %>
+	          <%= submit_tag('Become Traveller', name: :nil, class: "btn btn-outline-dark my-2 my-sm-0") %>
+	        <%end%> 
+	        <%= form_tag(assign_role_path, method: :get, class: "form-inline my-2 my-lg-0")  do %>
+	        	<%= hidden_field_tag(:role, "sender") %>
+	          <%= submit_tag('Become Sender', name: :nil, class: "btn btn-dark my-2 my-sm-0") %>
+	        <%end%>
+	      </div>
+	    </div>
+		<%elsif current_user.has_role? :sender %>
+			<h1>You'r a sender</h1><br>
+			<%= link_to "Make an Order", new_order_path, class: "btn btn-dark" %>
+		<% else %>
+			<h1>You are a Traveler</h1>
+			<%= link_to "Add Travel Details", new_traveler_journey_path, class: "btn btn-dark" %>
+		<%end%>
+	<% end %>
+	<% if current_user %>	
+		<%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class:'btn btn-danger'	%>
+	<%else%>
+		<p> you are not signed-in.</p>
+		<%=	link_to 'Sign-up',new_user_registration_path,class:'btn btn-primary'%> <br>
+		<%= link_to 'Login',new_user_session_path,class:'btn btn-light' %>	
+	<%end%>
+</div>
